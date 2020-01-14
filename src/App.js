@@ -42,13 +42,14 @@ const useStyles = makeStyles(theme => ({
 function App() {
   const classes = useStyles();
   const [movieData, setMovieData] = useState([]);
-  const [date, setDate] = useState("2020-01-13");
+  const [date, setDate] = useState("2020-09-14");
   const [movieInfo, setMovieInfo] = useState("");
   const [movieImg, setMovieImg] = useState("");
   const [movieTitle, setMovieTitle] = useState("");
 
   const changeDate = e => {
     setDate(e.target.value);
+    console.log(date);
   };
 
   const getDate = async () => {
@@ -103,30 +104,34 @@ function App() {
             </Typography>
             <hr />
             <Card style={{ display: "flex", width: 350, marginBottom: 10 }}>
-              <CardMedia
-                image={movieImg}
-                title="Movie"
-                component="img"
-                style={{ width: 175 }}
-              ></CardMedia>
-              <div style={{ marginLeft: 10 }}>
-                <Typography gutterBottom variant="subtitle1">
-                  {movieTitle}
-                </Typography>
-                <hr />
-                <Typography
-                  gutterBottom
-                  variant="body2"
-                  style={{
-                    textOverflow: "ellipsis",
-                    overflow: "hidden",
-                    whiteSpace: "wrap",
-                    height: 150
-                  }}
-                >
-                  {movieInfo}
-                </Typography>
-              </div>
+              {movieTitle === null ? null : (
+                <>
+                  <CardMedia
+                    image={movieImg}
+                    title="Movie"
+                    component="img"
+                    style={{ width: 175 }}
+                  ></CardMedia>
+                  <div style={{ marginLeft: 10 }}>
+                    <Typography gutterBottom variant="subtitle1">
+                      {movieTitle}
+                    </Typography>
+                    <hr />
+                    <Typography
+                      gutterBottom
+                      variant="body2"
+                      style={{
+                        textOverflow: "ellipsis",
+                        overflow: "hidden",
+                        whiteSpace: "wrap",
+                        height: 150
+                      }}
+                    >
+                      {movieInfo}
+                    </Typography>
+                  </div>
+                </>
+              )}
             </Card>
           </Card>
 
@@ -135,10 +140,17 @@ function App() {
               Movies Released The Month You Were Born
             </Typography>
             <hr />
-            <div style={{ display: "flex", flexDirection: "row" }}>
-              {movieData[1].map(movie => {
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "space-between"
+              }}
+            >
+              {movieData[1].map((movie, index) => {
                 return (
-                  <Card style={{ marginBottom: 10, width: 175 }}>
+                  <Card style={{ marginBottom: 10, width: 175 }} key={index}>
                     <CardMedia
                       image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                       title="Movie"
@@ -160,7 +172,7 @@ function App() {
 
           <Card className={classes.movieCard} elevation={3}>
             <Typography gutterBottom variant="h5" component="h2">
-              Movies Released Year {date.substring(0, 4)}
+              Movies Released This Year {date.substring(0, 4)}
             </Typography>
             <hr />
             <div
@@ -171,9 +183,9 @@ function App() {
                 justifyContent: "space-between"
               }}
             >
-              {movieData[2].map(movie => {
+              {movieData[2].map((movie, index) => {
                 return (
-                  <Card style={{ marginBottom: 10, width: 175 }}>
+                  <Card style={{ marginBottom: 10, width: 175 }} key={index}>
                     <CardMedia
                       image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                       title="Movie"
