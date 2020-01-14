@@ -54,7 +54,7 @@ function App() {
 
   const getDate = async () => {
     const response = await fetch(
-      `https://guarded-anchorage-41477.herokuapp.com/api/movie?birth=${date}`
+      `https://cors-anywhere.herokuapp.com/https://guarded-anchorage-41477.herokuapp.com/api/movie?birth=${date}`
     );
     const data = await response.json();
     console.log(data);
