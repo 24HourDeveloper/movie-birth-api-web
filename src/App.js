@@ -24,8 +24,8 @@ const useStyles = makeStyles(theme => ({
   },
   movieCard: {
     marginTop: 25,
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: "auto",
+    marginRight: "auto",
     marginBottom: 25,
     width: "80%",
     padding: 10
