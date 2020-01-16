@@ -7,6 +7,7 @@ import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import "./App.css";
 
@@ -31,6 +32,14 @@ const useStyles = makeStyles(theme => ({
     width: "80%",
     padding: 10
   },
+  movieCard2: {
+    marginTop: 25,
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: 25,
+    width: "100%",
+    padding: 5
+  },
   textField: {
     width: "100%",
     marginBottom: theme.spacing(1)
@@ -42,6 +51,7 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
   const classes = useStyles();
+  const mediaQuery = useMediaQuery("(min-width: 500px)");
   const [isLoading, setIsLoading] = useState(false);
   const [movieData, setMovieData] = useState([]);
   const [date, setDate] = useState("2020-09-14");
@@ -67,7 +77,7 @@ function App() {
     setMovieImg(`https://image.tmdb.org/t/p/w500${data[0].poster_path}`);
     setIsLoading(false);
   };
-
+  console.log(mediaQuery);
   return (
     <>
       <div className="App">
@@ -102,7 +112,10 @@ function App() {
       </div>
       {movieData.length > 0 ? (
         <>
-          <Card className={classes.movieCard} elevation={3}>
+          <Card
+            className={mediaQuery ? classes.movieCard : classes.movieCard2}
+            elevation={3}
+          >
             <Typography gutterBottom variant="h5" component="h2">
               What Movies Were Released On Your Birthday?
             </Typography>
@@ -139,18 +152,30 @@ function App() {
             </Card>
           </Card>
 
-          <Card className={classes.movieCard} elevation={3}>
+          <Card
+            className={mediaQuery ? classes.movieCard : classes.movieCard2}
+            elevation={3}
+          >
             <Typography gutterBottom variant="h5" component="h2">
               Movies Released The Month You Were Born
             </Typography>
             <hr />
             <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "space-between"
-              }}
+              style={
+                mediaQuery
+                  ? {
+                      display: "flex",
+                      flexDirection: "row",
+                      flexWrap: "wrap",
+                      justifyContent: "space-between"
+                    }
+                  : {
+                      display: "flex",
+                      flexDirection: "row",
+                      flexWrap: "wrap",
+                      justifyContent: "space-around"
+                    }
+              }
             >
               {movieData[1].map((movie, index) => {
                 return (
@@ -174,18 +199,30 @@ function App() {
             </div>
           </Card>
 
-          <Card className={classes.movieCard} elevation={3}>
+          <Card
+            className={mediaQuery ? classes.movieCard : classes.movieCard2}
+            elevation={3}
+          >
             <Typography gutterBottom variant="h5" component="h2">
               Movies Released This Year {date.substring(0, 4)}
             </Typography>
             <hr />
             <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "space-between"
-              }}
+              style={
+                mediaQuery
+                  ? {
+                      display: "flex",
+                      flexDirection: "row",
+                      flexWrap: "wrap",
+                      justifyContent: "space-between"
+                    }
+                  : {
+                      display: "flex",
+                      flexDirection: "row",
+                      flexWrap: "wrap",
+                      justifyContent: "space-around"
+                    }
+              }
             >
               {movieData[2].map((movie, index) => {
                 return (
