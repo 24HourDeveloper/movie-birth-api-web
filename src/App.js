@@ -6,6 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import "./App.css";
 
@@ -41,6 +42,7 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
   const classes = useStyles();
+  const [isLoading, setIsLoading] = useState(false);
   const [movieData, setMovieData] = useState([]);
   const [date, setDate] = useState("2020-09-14");
   const [movieInfo, setMovieInfo] = useState("");
@@ -53,6 +55,7 @@ function App() {
   };
 
   const getDate = async () => {
+    setIsLoading(true);
     const response = await fetch(
       `https://cors-anywhere.herokuapp.com/https://guarded-anchorage-41477.herokuapp.com/api/movie?birth=${date}`
     );
@@ -62,6 +65,7 @@ function App() {
     setMovieTitle(data[0].title);
     setMovieInfo(data[0].overview);
     setMovieImg(`https://image.tmdb.org/t/p/w500${data[0].poster_path}`);
+    setIsLoading(false);
   };
 
   return (
@@ -204,6 +208,13 @@ function App() {
               })}
             </div>
           </Card>
+        </>
+      ) : isLoading ? (
+        <>
+          <div style={{ width: "100%", textAlign: "center", marginTop: 20 }}>
+            <CircularProgress />
+            <Typography variant="subtitle1">Fetching Movies</Typography>
+          </div>
         </>
       ) : null}
     </>
