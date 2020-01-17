@@ -53,6 +53,7 @@ function App() {
   const classes = useStyles();
   const mediaQuery = useMediaQuery("(min-width: 500px)");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const [movieData, setMovieData] = useState([]);
   const [date, setDate] = useState("2020-09-14");
   const [movieInfo, setMovieInfo] = useState("");
@@ -66,18 +67,28 @@ function App() {
 
   const getDate = async () => {
     setIsLoading(true);
-    const response = await fetch(
-      `https://cors-anywhere.herokuapp.com/https://guarded-anchorage-41477.herokuapp.com/api/movie?birth=${date}`
-    );
-    const data = await response.json();
-    console.log(data);
-    setMovieData(data);
-    setMovieTitle(data[0].title);
-    setMovieInfo(data[0].overview);
-    setMovieImg(`https://image.tmdb.org/t/p/w500${data[0].poster_path}`);
-    setIsLoading(false);
+    setError("");
+    try {
+      const response = await fetch(
+        `https://cors-anywhere.herokuapp.com/https://guarded-anchorage-41477.herokuapp.com/api/movie?birth=${date}`
+      );
+      const data = await response.json();
+      console.log(data);
+      if (data.status === 404) {
+        setError(data.error);
+        setIsLoading(false);
+        return;
+      }
+      setMovieData(data);
+      setMovieTitle(data[0].title);
+      setMovieInfo(data[0].overview);
+      setMovieImg(`https://image.tmdb.org/t/p/w500${data[0].poster_path}`);
+      setIsLoading(false);
+    } catch (err) {
+      setError(`${err.message} check internet connection!`);
+      setIsLoading(false);
+    }
   };
-  console.log(mediaQuery);
   return (
     <>
       <div className="App">
@@ -110,6 +121,15 @@ function App() {
           </CardContent>
         </Card>
       </div>
+      {error ? (
+        <>
+          <div style={{ width: "100%", textAlign: "center", marginTop: 20 }}>
+            <Typography variant="subtitle1" style={{ color: "red" }}>
+              {error}
+            </Typography>
+          </div>
+        </>
+      ) : null}
       {movieData.length > 0 ? (
         <>
           <Card
