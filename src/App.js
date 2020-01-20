@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { CircularProgress, Typography, useMediaQuery } from "@material-ui/core";
+import Sharer from "sharer.npm.js";
 
 import "./App.css";
 import MovieCard from "./components/MovieCard";
 import BirthCard from "./components/BirthCard";
 import CalendarCard from "./components/CalendarCard";
+import ShareButton from "./components/ShareButton";
 
 function App() {
   const mediaQuery = useMediaQuery("(min-width: 500px)");
@@ -38,6 +40,11 @@ function App() {
     }
   };
 
+  const handleClick = e => {
+    const sharer = new Sharer(e.target);
+    sharer.share();
+  };
+
   const cardTitleArray = [
     "Movies Released The Month You Were Born",
     `Movies Released This Year ${date.substring(0, 4)}`
@@ -47,6 +54,26 @@ function App() {
     <>
       <div className="App">
         <CalendarCard getDate={getDate} changeDate={changeDate} date={date} />
+        <div
+          style={{
+            width: 350,
+            marginLeft: "auto",
+            marginRight: "auto",
+            display: "flex",
+            justifyContent: "space-between"
+          }}
+        >
+          <ShareButton
+            label="Share on Twitter"
+            social="twitter"
+            handleClick={handleClick}
+          />
+          <ShareButton
+            label="Share on Facebook"
+            social="facebook"
+            handleClick={handleClick}
+          />
+        </div>
       </div>
       {error ? (
         <>
