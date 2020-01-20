@@ -9464,6 +9464,11 @@ shallow-clone@^3.0.0:
   dependencies:
     kind-of "^6.0.2"
 
+sharer.js@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/sharer.js/-/sharer.js-0.4.0.tgz#73f2cd36ad82135137d56f17271d2d46a7081a91"
+  integrity sha512-dTKCju0QdewFMHeGHvzYOolNC3DX0HJmQWYSWQVF5qYqDof1Jfq7D43ep3F7aiUVdSoWf/zcOaKFErTlqNKPKQ==
+
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"

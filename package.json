@@ -12,6 +12,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0",
+    "sharer.npm.js": "0.0.10",
     "typeface-roboto": "0.0.75"
   },
   "scripts": {
