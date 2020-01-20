@@ -1,28 +1,10 @@
 import React from "react";
 import { Card, CardMedia, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
-  movieCard: {
-    marginTop: 25,
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginBottom: 25,
-    width: "80%",
-    padding: 10
-  },
-  movieCard2: {
-    marginTop: 25,
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginBottom: 25,
-    width: "100%",
-    padding: 5
-  }
-});
+import { cardStyle, styles } from "../styles/styles";
 
 export default function MovieCard({ cardTitle, data, mediaQuery, index }) {
-  const classes = useStyles();
+  const classes = cardStyle();
   return (
     <>
       <Card
@@ -33,24 +15,11 @@ export default function MovieCard({ cardTitle, data, mediaQuery, index }) {
           {cardTitle}
         </Typography>
         <hr />
-        <div
-          style={
-            mediaQuery
-              ? {
-                  display: "flex",
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  justifyContent: "space-between"
-                }
-              : {
-                  display: "flex",
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  justifyContent: "space-around"
-                }
-          }
-        >
+        <div style={mediaQuery ? styles.queryWeb : styles.queryMobile}>
           {data[index].map((movie, index) => {
+            //data[index] is for specifying which array of movie data to use
+            //the movie data being received is an array with 3 indexes
+            //each card display a different index
             return (
               <Card style={{ marginBottom: 10, width: 175 }} key={index}>
                 <CardMedia

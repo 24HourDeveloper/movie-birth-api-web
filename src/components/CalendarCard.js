@@ -6,28 +6,11 @@ import {
   TextField,
   Button
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
-  card: {
-    width: 350,
-    height: 300,
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: 50,
-    paddingTop: "5%"
-  },
-  textField: {
-    width: "100%",
-    marginBottom: theme.spacing(1)
-  },
-  button: {
-    width: "100%"
-  }
-}));
+import { cardStyle } from "../styles/styles";
 
 export default function CalendarCard({ getDate, changeDate, date }) {
-  const classes = useStyles();
+  const classes = cardStyle();
   return (
     <>
       <Card className={classes.card} elevation={3}>

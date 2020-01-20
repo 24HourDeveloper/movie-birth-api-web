@@ -1,25 +1,7 @@
 import React from "react";
 import { Card, CardMedia, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
-  movieCard: {
-    marginTop: 25,
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginBottom: 25,
-    width: "80%",
-    padding: 10
-  },
-  movieCard2: {
-    marginTop: 25,
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginBottom: 25,
-    width: "100%",
-    padding: 5
-  }
-});
+import { cardStyle } from "../styles/styles";
 
 export default function BirthCard({
   cardTitle,
@@ -28,7 +10,7 @@ export default function BirthCard({
   mImg,
   mediaQuery
 }) {
-  const classes = useStyles();
+  const classes = cardStyle();
   return (
     <>
       <Card

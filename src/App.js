@@ -12,9 +12,6 @@ function App() {
   const [error, setError] = useState("");
   const [movieData, setMovieData] = useState([]);
   const [date, setDate] = useState("2020-09-14");
-  const [movieInfo, setMovieInfo] = useState("");
-  const [movieImg, setMovieImg] = useState("");
-  const [movieTitle, setMovieTitle] = useState("");
 
   const changeDate = e => {
     setDate(e.target.value);
@@ -34,15 +31,18 @@ function App() {
         return;
       }
       setMovieData(data);
-      setMovieTitle(data[0].title);
-      setMovieInfo(data[0].overview);
-      setMovieImg(`https://image.tmdb.org/t/p/w500${data[0].poster_path}`);
       setIsLoading(false);
     } catch (err) {
       setError(`${err.message} check internet connection!`);
       setIsLoading(false);
     }
   };
+
+  const cardTitleArray = [
+    "Movies Released The Month You Were Born",
+    `Movies Released This Year ${date.substring(0, 4)}`
+  ];
+  console.log(movieData);
   return (
     <>
       <div className="App">
@@ -61,16 +61,13 @@ function App() {
         <>
           <BirthCard
             cardTitle="Movies Released The Day You Were Born"
-            mTitle={movieTitle}
-            mInfo={movieInfo}
-            mImg={movieImg}
+            mTitle={movieData[0].title}
+            mInfo={movieData[0].overview}
+            mImg={`https://image.tmdb.org/t/p/w500${movieData[0].poster_path}`}
             mediaQuery={mediaQuery}
           />
 
-          {[
-            "Movies Released The Month You Were Born",
-            `Movies Released This Year ${date.substring(0, 4)}`
-          ].map((title, index) => {
+          {cardTitleArray.map((title, index) => {
             return (
               <MovieCard
                 key={index}
