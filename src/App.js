@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { CircularProgress, Typography, useMediaQuery } from "@material-ui/core";
+import {
+  CircularProgress,
+  Typography,
+  useMediaQuery,
+  Button
+} from "@material-ui/core";
 import Sharer from "sharer.npm.js";
 
 import "./App.css";
+import { styles } from "./styles/styles";
 import MovieCard from "./components/MovieCard";
 import BirthCard from "./components/BirthCard";
 import CalendarCard from "./components/CalendarCard";
@@ -41,39 +47,57 @@ function App() {
   };
 
   const handleClick = e => {
-    const sharer = new Sharer(e.target);
-    sharer.share();
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Share Your Movies",
+          url: "https://blissful-beaver-33cf0d.netlify.com/"
+        })
+        .then(() => console.log("shared!!"))
+        .catch(err => console.log(err));
+    } else {
+      const sharer = new Sharer(e.target);
+      sharer.share();
+    }
   };
 
   const cardTitleArray = [
     "Movies Released The Month You Were Born",
     `Movies Released This Year ${date.substring(0, 4)}`
   ];
-  console.log(movieData);
+  console.log(navigator.share);
   return (
     <>
       <div className="App">
         <CalendarCard getDate={getDate} changeDate={changeDate} date={date} />
-        <div
-          style={{
-            width: 350,
-            marginLeft: "auto",
-            marginRight: "auto",
-            display: "flex",
-            justifyContent: "space-between"
-          }}
-        >
-          <ShareButton
-            label="Share on Twitter"
-            social="twitter"
-            handleClick={handleClick}
-          />
-          <ShareButton
-            label="Share on Facebook"
-            social="facebook"
-            handleClick={handleClick}
-          />
-        </div>
+
+        {movieData.length ? (
+          <div
+            style={
+              mediaQuery ? styles.webShareButtons : styles.mobileShareButton
+            }
+          >
+            {mediaQuery ? (
+              ["twitter", "facebook"].map(socialSite => (
+                <ShareButton
+                  label={`Share on ${socialSite}`}
+                  social={socialSite}
+                  handleClick={handleClick}
+                />
+              ))
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleClick}
+                elevation={2}
+                style={{ marginTop: 10 }}
+              >
+                Share
+              </Button>
+            )}
+          </div>
+        ) : null}
       </div>
       {error ? (
         <>

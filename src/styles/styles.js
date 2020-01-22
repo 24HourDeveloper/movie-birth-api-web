@@ -46,5 +46,41 @@ export const styles = {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between"
+  },
+  webShareButtons: {
+    width: 350,
+    marginLeft: "auto",
+    marginRight: "auto",
+    display: "flex",
+    justifyContent: "space-between"
+  },
+  mobileShareButton: {
+    width: "80%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    display: "flex",
+    flexDirection: "column"
+  },
+  shareButton1: {
+    borderRadius: 4,
+    fontWeight: 500,
+    color: "#fff",
+    background: "#3f51b5",
+    padding: 10,
+    marginTop: 10,
+    width: 180,
+    borderStyle: "solid",
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif'
+  },
+  shareButton2: {
+    borderRadius: 4,
+    fontWeight: 500,
+    color: "#fff",
+    background: "#3f51b5",
+    padding: 10,
+    marginTop: 10,
+    width: "100%",
+    borderStyle: "solid",
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif'
   }
 };
