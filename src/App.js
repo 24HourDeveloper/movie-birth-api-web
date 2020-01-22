@@ -44,6 +44,7 @@ function App() {
       const titles = data[2].map(item => item.title);
       const formatedTitles = titles.slice(0, 5);
       setShareMovies(formatedTitles.toString());
+      document.title = `${date.substring(0, 4)} Movies`; // this changes the site title dynamically based on your input date.
     } catch (err) {
       setError(`${err.message} check internet connection!`);
       setIsLoading(false);
