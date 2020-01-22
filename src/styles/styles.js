@@ -55,7 +55,7 @@ export const styles = {
     justifyContent: "space-between"
   },
   mobileShareButton: {
-    width: "80%",
+    width: "95%",
     marginLeft: "auto",
     marginRight: "auto",
     display: "flex",

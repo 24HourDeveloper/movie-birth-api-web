@@ -20,6 +20,7 @@ function App() {
   const [error, setError] = useState("");
   const [movieData, setMovieData] = useState([]);
   const [date, setDate] = useState("2020-09-14");
+  const [shareMovies, setShareMovies] = useState("");
 
   const changeDate = e => {
     setDate(e.target.value);
@@ -40,17 +41,21 @@ function App() {
       }
       setMovieData(data);
       setIsLoading(false);
+      const titles = data[2].map(item => item.title);
+      const formatedTitles = titles.slice(0, 5);
+      setShareMovies(formatedTitles.toString());
     } catch (err) {
       setError(`${err.message} check internet connection!`);
       setIsLoading(false);
     }
   };
 
-  const handleClick = e => {
+  const handleShare = e => {
     if (navigator.share) {
       navigator
         .share({
           title: "Share Your Movies",
+          text: `A few movies that released my year ${shareMovies}`,
           url: "https://blissful-beaver-33cf0d.netlify.com/"
         })
         .then(() => console.log("shared!!"))
@@ -65,7 +70,6 @@ function App() {
     "Movies Released The Month You Were Born",
     `Movies Released This Year ${date.substring(0, 4)}`
   ];
-  console.log(navigator.share);
   return (
     <>
       <div className="App">
@@ -80,16 +84,18 @@ function App() {
             {mediaQuery ? (
               ["twitter", "facebook"].map(socialSite => (
                 <ShareButton
+                  key={socialSite}
                   label={`Share on ${socialSite}`}
                   social={socialSite}
-                  handleClick={handleClick}
+                  handleClick={handleShare}
+                  movieList={shareMovies}
                 />
               ))
             ) : (
               <Button
                 variant="contained"
                 color="primary"
-                onClick={handleClick}
+                onClick={handleShare}
                 elevation={2}
                 style={{ marginTop: 10 }}
               >
