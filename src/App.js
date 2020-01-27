@@ -23,8 +23,8 @@ function App() {
   const [date, setDate] = useState("2020-09-14");
   const [shareMovies, setShareMovies] = useState("");
 
-  const changeDate = e => {
-    setDate(e.target.value);
+  const changeDate = event => {
+    setDate(event.target.value);
   };
 
   const getDate = async () => {
@@ -52,7 +52,7 @@ function App() {
     }
   };
 
-  const handleShare = e => {
+  const handleShare = event => {
     if (navigator.share) {
       navigator
         .share({
@@ -63,7 +63,7 @@ function App() {
         .then(() => console.log("shared!!"))
         .catch(err => console.log(err));
     } else {
-      const sharer = new Sharer(e.target);
+      const sharer = new Sharer(event.target);
       sharer.share();
     }
   };

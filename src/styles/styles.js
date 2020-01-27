@@ -60,27 +60,5 @@ export const styles = {
     marginRight: "auto",
     display: "flex",
     flexDirection: "column"
-  },
-  shareButton1: {
-    borderRadius: 4,
-    fontWeight: 500,
-    color: "#fff",
-    background: "#3f51b5",
-    padding: 10,
-    marginTop: 10,
-    width: 180,
-    borderStyle: "solid",
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif'
-  },
-  shareButton2: {
-    borderRadius: 4,
-    fontWeight: 500,
-    color: "#fff",
-    background: "#3f51b5",
-    padding: 10,
-    marginTop: 10,
-    width: "100%",
-    borderStyle: "solid",
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif'
   }
 };
