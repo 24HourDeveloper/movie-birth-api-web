@@ -13,6 +13,7 @@ import MovieCard from "./components/MovieCard";
 import BirthCard from "./components/BirthCard";
 import CalendarCard from "./components/CalendarCard";
 import ShareButton from "./components/ShareButton";
+import Div from "./components/Div";
 
 function App() {
   const mediaQuery = useMediaQuery("(min-width: 500px)");
@@ -71,6 +72,7 @@ function App() {
     "Movies Released The Month You Were Born",
     `Movies Released This Year ${date.substring(0, 4)}`
   ];
+
   return (
     <>
       <div className="App">
@@ -108,11 +110,11 @@ function App() {
       </div>
       {error ? (
         <>
-          <div style={{ width: "100%", textAlign: "center", marginTop: 20 }}>
+          <Div>
             <Typography variant="subtitle1" style={{ color: "red" }}>
               {error}
             </Typography>
-          </div>
+          </Div>
         </>
       ) : null}
       {movieData.length > 0 ? (
@@ -139,10 +141,10 @@ function App() {
         </>
       ) : isLoading ? (
         <>
-          <div style={{ width: "100%", textAlign: "center", marginTop: 20 }}>
+          <Div>
             <CircularProgress />
             <Typography variant="subtitle1">Fetching Movies</Typography>
-          </div>
+          </Div>
         </>
       ) : null}
     </>
