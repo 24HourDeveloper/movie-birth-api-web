@@ -73,6 +73,7 @@ function App() {
     `Movies Released This Year ${date.substring(0, 4)}`
   ];
 
+  console.log(movieData);
   return (
     <>
       <div className="App">

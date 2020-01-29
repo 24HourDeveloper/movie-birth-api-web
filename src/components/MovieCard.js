@@ -20,10 +20,15 @@ export default function MovieCard({ cardTitle, data, mediaQuery, index }) {
             //data[index] is for specifying which array of movie data to use
             //the movie data being received is an array with 3 indexes
             //each card display a different index
+            //add conditional if image is null!! 1/27/2020
             return (
               <Card style={{ marginBottom: 10, width: 175 }} key={index}>
                 <CardMedia
-                  image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  image={
+                    movie.poster_path !== null
+                      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                      : require("../img/no-img.png")
+                  }
                   title="Movie"
                   component="img"
                   style={{ width: 175 }}
